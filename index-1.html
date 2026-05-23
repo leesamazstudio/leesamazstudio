@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lee Samaz Studio — Premium Creative Media & Branding Studio based in Pretoria, South Africa. Graphic Design, Photography, Video Editing, Branding, Drone Cinematography and Online Academy.">
+<title>Lee Samaz Studio | Your Vision. Our Art. — Pretoria, South Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & ROOT
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; }
+button { border: none; outline: none; background: none; }
+ul { list-style: none; }
+
+:root {
+  --red:    #E8001D;
+  --red-dk: #B8001A;
+  --black:  #080808;
+  --grey:   #111111;
+  --mid:    #1c1c1c;
+  --border: rgba(255,255,255,0.07);
+  --white:  #F4F1EC;
+  --gold:   #C9A84C;
+  --muted:  rgba(244,241,236,0.45);
+  --muted2: rgba(244,241,236,0.25);
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ============================================================
+   CURSOR
+============================================================ */
+#cur, #cur2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s;
+}
+#cur  { width:10px; height:10px; background:var(--red); }
+#cur2 { width:34px; height:34px; border:1px solid rgba(232,0,29,.45); transition: left .12s ease, top .12s ease, width .2s, height .2s; }
+
+/* ============================================================
+   NOISE GRAIN
+============================================================ */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9990;
+}
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+#nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 56px;
+  transition: background .4s, padding .35s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+#nav.stuck {
+  background: rgba(8,8,8,.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 14px 56px;
+  border-color: var(--border);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.nav-brand img {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(232,0,29,.4);
+}
+.nav-brand-text { line-height: 1; }
+.nav-brand-text .t1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px;
+  letter-spacing: 3.5px;
+  color: var(--white);
+}
+.nav-brand-text .t1 span { color: var(--red); }
+.nav-brand-text .t2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--muted2);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .25s;
+  position: relative;
+  padding-bottom: 3px;
+}
+.nav-links a::after {
+  content:'';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--red);
+  transition: width .3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 10px 26px;
+  background: var(--red);
+  color: var(--white);
+  transition: background .2s, transform .2s;
+}
+.nav-cta:hover { background: var(--red-dk); transform: translateY(-1px); }
+
+/* hamburger */
+.nav-ham {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  padding: 4px;
+}
+.nav-ham span {
+  width: 26px; height: 1.5px;
+  background: var(--white);
+  transition: .3s;
+  display: block;
+}
+.nav-ham.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+.nav-ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-ham.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,8,.98);
+  z-index: 490;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 4px;
+  color: var(--white);
+  transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--red); }
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 60px 80px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--red);
+}
+
+.hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(68px, 8.5vw, 126px);
+  line-height: .9;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero-h1 .ghost {
+  -webkit-text-stroke: 1px rgba(244,241,236,.2);
+  color: transparent;
+}
+.hero-h1 .red { color: var(--red); }
+
+.hero-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.hero-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 400px;
+  margin-bottom: 44px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-red {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 15px 36px;
+  background: var(--red);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-red:hover {
+  background: var(--red-dk);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(232,0,29,.35);
+}
+
+.btn-ghost {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(244,241,236,.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color .25s, background .25s, transform .2s;
+}
+.btn-ghost:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,.04);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.stat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--white);
+}
+.stat-n em { color: var(--red); font-style: normal; }
+.stat-l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-top: 4px;
+}
+
+/* Hero right – image collage */
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-right::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--black) 0%, transparent 35%),
+    linear-gradient(to top, var(--black) 0%, transparent 30%);
+  z-index: 2;
+}
+
+.img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  gap: 3px;
+}
+.img-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: kb 14s ease-in-out infinite alternate;
+}
+.img-grid img:nth-child(2) { animation-delay: -3.5s; }
+.img-grid img:nth-child(3) { animation-delay: -7s; }
+.img-grid img:nth-child(4) { animation-delay: -10.5s; }
+@keyframes kb { from{transform:scale(1)} to{transform:scale(1.07)} }
+
+/* Rotating ring badge */
+.hero-badge {
+  position: absolute;
+  bottom: 44px; right: 44px;
+  z-index: 10;
+  width: 106px; height: 106px;
+}
+.badge-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(232,0,29,.4);
+  animation: spin 22s linear infinite;
+}
+.badge-dot {
+  position: absolute;
+  top: -4px; left: 50%;
+  transform: translateX(-50%);
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+}
+.badge-inner {
+  position: absolute;
+  inset: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.badge-inner span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 1.25;
+  text-align: center;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   MARQUEE
+============================================================ */
+.marquee-bar {
+  background: var(--red);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 13px 0;
+  position: relative;
+  z-index: 3;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  padding: 0 36px;
+  color: rgba(255,255,255,.88);
+}
+.marquee-track .sep {
+  color: rgba(255,255,255,.35);
+  padding: 0;
+  letter-spacing: 0;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ============================================================
+   SHARED SECTION ELEMENTS
+============================================================ */
+.section {
+  padding: 110px 80px;
+  position: relative;
+}
+.section-dark  { background: var(--black); }
+.section-grey  { background: var(--grey); }
+.section-mid   { background: var(--mid); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content:'';
+  width: 20px; height: 1px;
+  background: var(--red);
+}
+
+.sh1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 5.5vw, 72px);
+  line-height: .93;
+  letter-spacing: 2px;
+}
+.sh1 .red   { color: var(--red); }
+.sh1 .ghost {
+  -webkit-text-stroke: 1px rgba(244,241,236,.18);
+  color: transparent;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 520px;
+  margin-top: 16px;
+}
+
+/* Grid separator style */
+.grid-sep {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+#about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+  height: 580px;
+  flex-shrink: 0;
+}
+.about-visual img {
+  position: absolute;
+  object-fit: cover;
+}
+.av-main {
+  width: 76%; height: 82%;
+  top: 0; left: 0;
+  z-index: 2;
+  border: 2px solid rgba(255,255,255,.04);
+}
+.av-secondary {
+  width: 52%; height: 52%;
+  bottom: 0; right: 0;
+  z-index: 3;
+  border: 4px solid var(--grey);
+}
+.av-accent {
+  width: 36%; height: 28%;
+  top: 60%; left: 22%;
+  z-index: 1;
+  filter: brightness(.35);
+}
+.av-badge {
+  position: absolute;
+  top: 28px; right: -4px;
+  z-index: 4;
+  background: var(--red);
+  padding: 18px 22px;
+  text-align: center;
+  min-width: 90px;
+}
+.av-badge .n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  line-height: 1;
+}
+.av-badge .l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  margin-top: 2px;
+}
+
+.about-text .sh1 { margin-bottom: 24px; margin-top: 8px; }
+.about-text p {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 36px;
+}
+.val {
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  transition: border-color .3s, background .3s;
+}
+.val:hover { border-color: var(--red); background: rgba(232,0,29,.04); }
+.val-t {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 7px;
+}
+.val-d { font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+
+/* ============================================================
+   SERVICES
+============================================================ */
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.services-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+.svc {
+  background: var(--black);
+  padding: 38px 28px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.svc::after {
+  content:'';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+}
+.svc:hover { background: rgba(232,0,29,.035); }
+.svc:hover::after { transform: scaleX(1); }
+
+.svc-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 68px;
+  color: rgba(255,255,255,.03);
+  position: absolute;
+  top: 12px; right: 16px;
+  line-height: 1;
+  letter-spacing: -2px;
+  pointer-events: none;
+}
+.svc-icon {
+  font-size: 28px;
+  margin-bottom: 22px;
+  display: block;
+  line-height: 1;
+}
+.svc-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.svc-desc {
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.svc-price {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--red);
+  padding: 5px 12px;
+  border: 1px solid rgba(232,0,29,.3);
+}
+
+/* ============================================================
+   PORTFOLIO
+============================================================ */
+#portfolio {
+  padding: 110px 0;
+}
+.portfolio-header {
+  padding: 0 80px;
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.filter-row {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.fbtn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,.09);
+  transition: all .2s;
+}
+.fbtn.on, .fbtn:hover {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+}
+
+/* Masonry layout */
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 56px;
+  gap: 3px;
+  padding: 0 3px;
+}
+.mi { position: relative; overflow: hidden; }
+.mi img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .55s ease;
+  display: block;
+}
+.mi:hover img { transform: scale(1.065); }
+.mi-ov {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,.92) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity .3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 22px;
+}
+.mi:hover .mi-ov { opacity: 1; }
+.mi-cat {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 3px;
+}
+.mi-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* Grid positions */
+.mi-a { grid-column: 1/6;  grid-row: 1/9; }
+.mi-b { grid-column: 6/9;  grid-row: 1/5; }
+.mi-c { grid-column: 9/13; grid-row: 1/7; }
+.mi-d { grid-column: 6/9;  grid-row: 5/9; }
+.mi-e { grid-column: 1/5;  grid-row: 9/15; }
+.mi-f { grid-column: 5/9;  grid-row: 9/14; }
+.mi-g { grid-column: 9/13; grid-row: 7/13; }
+.mi-h { grid-column: 1/4;  grid-row: 15/20; }
+.mi-i { grid-column: 4/9;  grid-row: 14/20; }
+.mi-j { grid-column: 9/13; grid-row: 13/20; }
+
+/* ============================================================
+   ACADEMY
+============================================================ */
+#academy {
+  position: relative;
+  overflow: hidden;
+}
+#academy .bg-word {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28vw;
+  color: rgba(255,255,255,.012);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  letter-spacing: 12px;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.academy-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+.academy-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.academy-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.academy-img::after {
+  content: 'LEARN';
+  position: absolute;
+  bottom: 20px; left: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  color: rgba(232,0,29,.18);
+  line-height: 1;
+  letter-spacing: 4px;
+  pointer-events: none;
+}
+
+.courses-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+.course {
+  background: var(--black);
+  padding: 44px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.course::before {
+  content:'';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+}
+.course:hover { background: rgba(232,0,29,.03); }
+.course-dur {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.course-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+.course-desc {
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.course-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  line-height: 1;
+}
+.course-price small {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted2);
+  display: block;
+  margin-top: 3px;
+  letter-spacing: 1px;
+}
+.course-list {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.course-list li {
+  font-size: 12.5px;
+  color: var(--muted);
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.course-list li::before { content:'✦'; color:var(--red); font-size:8px; flex-shrink:0; }
+.course-cta {
+  display: inline-block;
+  margin-top: 28px;
+}
+
+/* Academy CTA card */
+.academy-cta-card {
+  background: rgba(232,0,29,.06);
+  border: 1px solid rgba(232,0,29,.2);
+  padding: 44px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.academy-cta-card .big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.academy-cta-card .big span { color: var(--red); }
+.academy-cta-card p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 220px;
+  margin-bottom: 28px;
+}
+.academy-cta-card .contact-line {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-top: 16px;
+}
+
+/* ============================================================
+   PRICING
+============================================================ */
+.pricing-grid {
+  grid-template-columns: repeat(3,1fr);
+  margin-top: 56px;
+}
+.pcard {
+  background: var(--grey);
+  padding: 48px 36px;
+  position: relative;
+  transition: background .3s;
+}
+.pcard:hover { background: rgba(232,0,29,.02); }
+.pcard.featured {
+  background: var(--mid);
+  border-left: 2px solid var(--red);
+  border-right: 2px solid var(--red);
+}
+.pcard.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 5px 14px;
+  white-space: nowrap;
+}
+.ptier {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+.pamount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 62px;
+  line-height: 1;
+}
+.pamount sup { font-size: 24px; vertical-align: top; margin-top: 10px; display: inline-block; }
+.pfrom {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 28px;
+  margin-top: 2px;
+}
+.plist {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.plist li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 7px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+}
+.plist li .ck { color: var(--red); flex-shrink: 0; margin-top: 1px; }
+.plist li.dim { opacity: .3; }
+.pbtn {
+  display: block;
+  text-align: center;
+  margin-top: 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px;
+  transition: all .25s;
+}
+.pbtn.ghost { border: 1px solid rgba(255,255,255,.15); color: var(--white); }
+.pbtn.ghost:hover { border-color: var(--red); color: var(--red); }
+.pbtn.solid { background: var(--red); color: var(--white); }
+.pbtn.solid:hover { background: var(--red-dk); }
+
+/* ============================================================
+   TESTIMONIALS
+============================================================ */
+.testi-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+.testi-left .big-q {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 180px;
+  color: rgba(232,0,29,.12);
+  line-height: .8;
+  display: block;
+  margin-bottom: 28px;
+}
+.testi-left .sh1 { margin-bottom: 20px; margin-top: 6px; }
+.testi-left p { font-size: 14px; line-height: 1.75; color: var(--muted); }
+.testi-left .btn-red { margin-top: 32px; }
+
+.testi-grid {
+  grid-template-columns: 1fr 1fr;
+}
+.tcard {
+  background: var(--black);
+  padding: 32px 28px;
+  transition: background .3s;
+}
+.tcard:hover { background: rgba(232,0,29,.03); }
+.tstars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+.ttext {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 18px;
+}
+.tauthor {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.trole {
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   PROCESS
+============================================================ */
+.process-grid {
+  grid-template-columns: repeat(6,1fr);
+  margin-top: 56px;
+}
+.pstep {
+  background: var(--grey);
+  padding: 32px 22px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.pstep:hover { background: rgba(232,0,29,.035); }
+.pstep-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: rgba(232,0,29,.55);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.pstep-t {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 9px;
+}
+.pstep-d { font-size: 12px; line-height: 1.65; color: var(--muted); }
+.pstep-arr {
+  position: absolute;
+  top: 32px; right: 14px;
+  font-size: 18px;
+  color: rgba(255,255,255,.06);
+}
+
+/* ============================================================
+   GALLERY STRIP (extra images showcase)
+============================================================ */
+.gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 3px;
+  height: 280px;
+}
+.gallery-strip img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s, filter .4s;
+  filter: brightness(.75) saturate(.8);
+}
+.gallery-strip img:hover {
+  transform: scale(1.04);
+  filter: brightness(1) saturate(1);
+}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+#contact { position: relative; overflow: hidden; }
+#contact .bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: .05;
+  pointer-events: none;
+}
+.contact-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.cinfo-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cinfo-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.cinfo-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+.cinfo-val { font-size: 15px; color: var(--white); }
+.cinfo-val a { color: var(--white); transition: color .2s; }
+.cinfo-val a:hover { color: var(--red); }
+.cinfo-sub { font-size: 12px; color: var(--muted2); margin-top: 2px; }
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+.soc-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color .2s;
+}
+.soc-link::before { content:'↗'; color:var(--red); }
+.soc-link:hover { color: var(--white); }
+
+/* FORM */
+.cform { display: flex; flex-direction: column; gap: 14px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fg { display: flex; flex-direction: column; gap: 7px; }
+.fg label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.fg input, .fg select, .fg textarea {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  color: var(--white);
+  padding: 13px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  width: 100%;
+  transition: border-color .25s;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--red); }
+.fg textarea { resize: vertical; min-height: 118px; }
+.fg select option { background: var(--black); }
+.fg select { cursor: none; }
+
+.fsub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 15px 40px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  align-self: flex-start;
+  transition: background .2s, transform .2s;
+}
+.fsub:hover { background: var(--red-dk); transform: translateY(-2px); }
+
+#form-ok {
+  display: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: 8px;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background: var(--mid);
+  border-top: 1px solid var(--border);
+  padding: 44px 80px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+.fcopy { font-size: 11.5px; color: var(--muted2); letter-spacing: 1px; }
+.flogo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 5px;
+  color: var(--muted2);
+  text-align: center;
+}
+.flogo span { color: var(--red); }
+.ftag {
+  font-size: 11.5px;
+  color: var(--muted2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.r {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.r.on { opacity: 1; transform: none; }
+.r.d1 { transition-delay: .08s; }
+.r.d2 { transition-delay: .17s; }
+.r.d3 { transition-delay: .26s; }
+.r.d4 { transition-delay: .35s; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1100px) {
+  #nav { padding: 18px 28px; }
+  #nav.stuck { padding: 12px 28px; }
+  .nav-links { display: none; }
+  .nav-ham { display: flex; }
+  .nav-cta { display: none; }
+
+  .section { padding: 80px 36px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 130px 36px 60px; }
+  .hero-right { height: 52vh; }
+
+  #about { grid-template-columns: 1fr; padding: 80px 36px; }
+  .about-visual { height: 340px; }
+  .av-main { width: 72%; height: 80%; }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+
+  #portfolio { padding: 80px 0; }
+  .portfolio-header { padding: 0 36px; }
+  .masonry { grid-template-columns: repeat(6,1fr); grid-auto-rows: 60px; }
+  .mi-a { grid-column:1/4; grid-row:1/7; }
+  .mi-b { grid-column:4/7; grid-row:1/4; }
+  .mi-c { grid-column:1/4; grid-row:7/12; }
+  .mi-d { grid-column:4/7; grid-row:4/8; }
+  .mi-e { grid-column:1/4; grid-row:12/17; }
+  .mi-f { grid-column:4/7; grid-row:8/12; }
+  .mi-g { grid-column:1/4; grid-row:17/22; }
+  .mi-h { grid-column:4/7; grid-row:12/16; }
+  .mi-i { grid-column:1/4; grid-row:22/27; }
+  .mi-j { grid-column:4/7; grid-row:16/22; }
+
+  .academy-intro { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pcard.featured { border: 2px solid var(--red); }
+  .testi-wrap { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: repeat(3,1fr); }
+  .gallery-strip { grid-template-columns: repeat(3,1fr); height: 220px; }
+  .gallery-strip img:nth-child(4),
+  .gallery-strip img:nth-child(5) { display: none; }
+  .contact-inner { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; text-align: center; gap: 10px; }
+  .ftag { text-align: center; }
+}
+
+@media (max-width: 680px) {
+  .section { padding: 64px 20px; }
+  .hero-left { padding: 110px 20px 52px; }
+  .hero-badge { display: none; }
+  .services-header { gap: 16px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .values { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-strip { grid-template-columns: 1fr 1fr; height: 180px; }
+  .gallery-strip img:nth-child(3) { display: none; }
+  .frow { grid-template-columns: 1fr; }
+  footer { padding: 32px 20px; }
+  .portfolio-header { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mob">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#portfolio" onclick="closeMob()">Portfolio</a>
+  <a href="#academy" onclick="closeMob()">Academy</a>
+  <a href="#pricing" onclick="closeMob()">Pricing</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="https://wa.me/27618201231" class="btn-red" style="margin-top:12px;padding:14px 32px;">WhatsApp Us</a>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">
+    <img src="186716.webp" alt="Lee Samaz Studio Logo">
+    <div class="nav-brand-text">
+      <div class="t1"><span>LEE</span> SAMAZ</div>
+      <div class="t2">Studio</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#academy">Academy</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/27618201231" class="nav-cta" target="_blank" rel="noopener">WhatsApp Us</a>
+  <button class="nav-ham" id="ham" aria-label="Menu" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Est. 2019 · Pretoria, South Africa</div>
+    <h1 class="hero-h1">
+      <span class="ghost">YOUR</span><br>
+      VISION.<br>
+      <span class="red">OUR</span><br>
+      ART.
+    </h1>
+    <p class="hero-sub">Premium Creative Media &amp; Branding</p>
+    <p class="hero-body">Lee Samaz Studio is where bold ideas meet professional execution. We build brands, capture moments, and craft visual stories that are impossible to ignore.</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-red">View Our Work <span>↓</span></a>
+      <a href="#contact"   class="btn-ghost">Get a Quote <span>→</span></a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">500<em>+</em></div>
+        <div class="stat-l">Projects Done</div>
+      </div>
+      <div>
+        <div class="stat-n">200<em>+</em></div>
+        <div class="stat-l">Happy Clients</div>
+      </div>
+      <div>
+        <div class="stat-n">5<em>+</em></div>
+        <div class="stat-l">Years Active</div>
+      </div>
+      <div>
+        <div class="stat-n">5<em>★</em></div>
+        <div class="stat-l">Client Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="img-grid">
+      <img src="394406.jpg" alt="Farida Skincare Brand Design — Lee Samaz Studio">
+      <img src="394359.jpg" alt="Couple Photography — Lee Samaz Studio">
+      <img src="394386.jpg" alt="Graphic Design Work — Lee Samaz Studio">
+      <img src="394369.jpg" alt="Wedding Event Design — Lee Samaz Studio">
+    </div>
+    <div class="hero-badge">
+      <div class="badge-ring"><div class="badge-dot"></div></div>
+      <div class="badge-inner">
+        <span>YOUR<br>BRAND<br>MATTERS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Graphic Design</span><span class="sep">✦</span>
+    <span>Photography</span><span class="sep">✦</span>
+    <span>Video Editing</span><span class="sep">✦</span>
+    <span>Branding</span><span class="sep">✦</span>
+    <span>Drone Cinema</span><span class="sep">✦</span>
+    <span>Digital Marketing</span><span class="sep">✦</span>
+    <span>Weddings &amp; Events</span><span class="sep">✦</span>
+    <span>3D Architecture</span><span class="sep">✦</span>
+    <span>Online Academy</span><span class="sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Graphic Design</span><span class="sep">✦</span>
+    <span>Photography</span><span class="sep">✦</span>
+    <span>Video Editing</span><span class="sep">✦</span>
+    <span>Branding</span><span class="sep">✦</span>
+    <span>Drone Cinema</span><span class="sep">✦</span>
+    <span>Digital Marketing</span><span class="sep">✦</span>
+    <span>Weddings &amp; Events</span><span class="sep">✦</span>
+    <span>3D Architecture</span><span class="sep">✦</span>
+    <span>Online Academy</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section section-grey">
+  <div class="about-visual r">
+    <img class="av-main"      src="394382.jpg"  alt="Lee Samaz Studio Wedding Photography">
+    <img class="av-secondary" src="394391.jpg"  alt="Lee Samaz Studio Lobola Event">
+    <img class="av-accent"    src="394383.jpg"  alt="Studio portfolio work">
+    <div class="av-badge">
+      <div class="n">2019</div>
+      <div class="l">Founded</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="eyebrow r">About Us</div>
+    <h2 class="sh1 r d1">WE ARE <span class="red">MORE</span><br>THAN<br><span class="ghost">DESIGNERS</span></h2>
+    <p class="r d2">Lee Samaz Studio is a premium creative media and branding studio based in Pretoria, South Africa. Founded by Lee Samunawo, what started as a one-man creative hustle has evolved into a dynamic team of passionate specialists — each mastering different domains of visual design, media production, and digital strategy.</p>
+    <p class="r d3">We are storytellers, visual architects, and brand builders. Every project is approached with cinematic storytelling principles — delivering work that carries emotional weight, atmosphere, and creative depth. Proudly African. Globally competitive. Always authentic.</p>
+    <div class="values">
+      <div class="val r d1">
+        <div class="val-t">Creativity</div>
+        <div class="val-d">We push boundaries and explore new creative frontiers for every client.</div>
+      </div>
+      <div class="val r d2">
+        <div class="val-t">Quality</div>
+        <div class="val-d">Premium output on every project — no shortcuts, no compromises.</div>
+      </div>
+      <div class="val r d3">
+        <div class="val-t">Impact</div>
+        <div class="val-d">We measure success by the real-world results our work creates.</div>
+      </div>
+      <div class="val r d4">
+        <div class="val-t">Culture</div>
+        <div class="val-d">Proudly African, globally competitive, always authentic.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="section section-dark">
+  <div class="services-header">
+    <div>
+      <div class="eyebrow r">What We Do</div>
+      <h2 class="sh1 r d1">OUR <span class="red">SERVICES</span><br><span class="ghost">&amp; EXPERTISE</span></h2>
+    </div>
+    <a href="#contact" class="btn-ghost r">Custom Quote →</a>
+  </div>
+  <div class="grid-sep services-grid">
+    <div class="svc r">
+      <span class="svc-n">01</span>
+      <span class="svc-icon">🎨</span>
+      <div class="svc-title">Graphic Design</div>
+      <div class="svc-desc">Flyers, posters, banners, menus, certificates, invitations and social media graphics. Built to communicate, captivate, and convert.</div>
+      <span class="svc-price">From R250</span>
+    </div>
+    <div class="svc r d1">
+      <span class="svc-n">02</span>
+      <span class="svc-icon">⬡</span>
+      <div class="svc-title">Logo &amp; Branding</div>
+      <div class="svc-desc">Custom logo design, brand guidelines, colour palettes, typography systems and complete brand identity kits.</div>
+      <span class="svc-price">From R500</span>
+    </div>
+    <div class="svc r d2">
+      <span class="svc-n">03</span>
+      <span class="svc-icon">📸</span>
+      <div class="svc-title">Photography</div>
+      <div class="svc-desc">Weddings, lobola, events, corporate headshots, product shoots, portraits and lifestyle photography.</div>
+      <span class="svc-price">From R600</span>
+    </div>
+    <div class="svc r d3">
+      <span class="svc-n">04</span>
+      <span class="svc-icon">🎬</span>
+      <div class="svc-title">Video Editing</div>
+      <div class="svc-desc">Professional video editing, social media reels, drone footage, wedding films, brand promos and cinematic cuts.</div>
+      <span class="svc-price">From R500</span>
+    </div>
+    <div class="svc r">
+      <span class="svc-n">05</span>
+      <span class="svc-icon">🚁</span>
+      <div class="svc-title">Drone Cinema</div>
+      <div class="svc-desc">High-definition aerial media, real estate showcases, commercial aerial promotions and cinematic event capture.</div>
+      <span class="svc-price">From R1,500</span>
+    </div>
+    <div class="svc r d1">
+      <span class="svc-n">06</span>
+      <span class="svc-icon">📱</span>
+      <div class="svc-title">Social Media</div>
+      <div class="svc-desc">Content creation, page management, Meta &amp; Google ads, campaign strategy and digital marketing consultation.</div>
+      <span class="svc-price">From R1,500/mo</span>
+    </div>
+    <div class="svc r d2">
+      <span class="svc-n">07</span>
+      <span class="svc-icon">💍</span>
+      <div class="svc-title">Weddings &amp; Events</div>
+      <div class="svc-desc">Full event branding, stationery, signage, backdrops, lobola packages and day-of materials.</div>
+      <span class="svc-price">From R1,000</span>
+    </div>
+    <div class="svc r d3">
+      <span class="svc-n">08</span>
+      <span class="svc-icon">🏗️</span>
+      <div class="svc-title">3D Architecture</div>
+      <div class="svc-desc">Photorealistic 3D renders, 2D floor plans, interior &amp; exterior visualizations and architectural briefs.</div>
+      <span class="svc-price">From R2,500</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <div class="eyebrow r">Our Work</div>
+      <h2 class="sh1 r d1">SELECTED <span class="red">PORTFOLIO</span><br><span class="ghost">&amp; PROJECTS</span></h2>
+      <div class="filter-row r d2">
+        <button class="fbtn on" onclick="setFilter(this,'all')">All Work</button>
+        <button class="fbtn" onclick="setFilter(this,'design')">Design</button>
+        <button class="fbtn" onclick="setFilter(this,'photo')">Photography</button>
+        <button class="fbtn" onclick="setFilter(this,'events')">Events</button>
+        <button class="fbtn" onclick="setFilter(this,'brand')">Branding</button>
+      </div>
+    </div>
+    <a href="#contact" class="btn-red r">Start a Project →</a>
+  </div>
+
+  <div class="masonry" id="masonry">
+    <div class="mi mi-a" data-cat="design">
+      <img src="394406.jpg" alt="Farida Skincare — graphic design campaign by Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Graphic Design</div><div class="mi-title">Farida Skincare Campaign</div></div></div>
+    </div>
+    <div class="mi mi-b" data-cat="brand">
+      <img src="394385.jpg" alt="Brand identity work — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Branding</div><div class="mi-title">Brand Identity Kit</div></div></div>
+    </div>
+    <div class="mi mi-c" data-cat="photo">
+      <img src="394359.jpg" alt="Couples photography — Lee Samaz Studio Pretoria" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Photography</div><div class="mi-title">Couples Portrait Session</div></div></div>
+    </div>
+    <div class="mi mi-d" data-cat="design">
+      <img src="394388.jpg" alt="Video editing software — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Video Production</div><div class="mi-title">Cinematic Editing</div></div></div>
+    </div>
+    <div class="mi mi-e" data-cat="events">
+      <img src="394391.jpg" alt="Lobola luncheon table setup — Lee Samaz Studio events" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Event Design</div><div class="mi-title">Lobola Luncheon Styling</div></div></div>
+    </div>
+    <div class="mi mi-f" data-cat="photo">
+      <img src="394393.jpg" alt="Traditional ceremony photography — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Photography</div><div class="mi-title">Traditional Ceremony</div></div></div>
+    </div>
+    <div class="mi mi-g" data-cat="photo">
+      <img src="394409.jpg" alt="Portrait photography — Lee Samaz Studio Pretoria" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Photography</div><div class="mi-title">Editorial Portrait</div></div></div>
+    </div>
+    <div class="mi mi-h" data-cat="events">
+      <img src="394369.jpg" alt="Wedding event design — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Event Design</div><div class="mi-title">Wedding Styling</div></div></div>
+    </div>
+    <div class="mi mi-i" data-cat="design">
+      <img src="394386.jpg" alt="Agricultural campaign design — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Graphic Design</div><div class="mi-title">Agricultural Campaign</div></div></div>
+    </div>
+    <div class="mi mi-j" data-cat="brand">
+      <img src="394383.jpg" alt="Logo design portfolio — Lee Samaz Studio" loading="lazy">
+      <div class="mi-ov"><div><div class="mi-cat">Logo &amp; Branding</div><div class="mi-title">Custom Logo Collection</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY STRIP ===== -->
+<div class="gallery-strip" aria-label="Portfolio gallery">
+  <img src="394355.jpg" alt="Lee Samaz Studio portfolio — design work" loading="lazy">
+  <img src="394367.jpg" alt="Lee Samaz Studio portfolio — video editing" loading="lazy">
+  <img src="394382.jpg" alt="Lee Samaz Studio portfolio — wedding photography" loading="lazy">
+  <img src="394393.jpg" alt="Lee Samaz Studio portfolio — event photography" loading="lazy">
+  <img src="394409.jpg" alt="Lee Samaz Studio portfolio — portrait" loading="lazy">
+</div>
+
+<!-- ===== ACADEMY ===== -->
+<section id="academy" class="section section-dark">
+  <div class="bg-word" aria-hidden="true">ACADEMY</div>
+  <div class="eyebrow r">Lee Samaz Academy</div>
+  <h2 class="sh1 r d1">LEARN <span class="red">CREATIVE</span><br><span class="ghost">SKILLS ONLINE</span></h2>
+
+  <div class="academy-intro">
+    <div>
+      <p class="lead r d2">100% online. Learn from anywhere on your phone or laptop. Build a real portfolio and launch your creative career with practical, mentor-led courses taught by Lee himself.</p>
+      <p style="font-size:13px;line-height:1.75;color:var(--muted);margin-top:16px;" class="r d3">Lee Samaz Studio is not a government-accredited institution. We focus on real-world skills, practical portfolios, and business confidence — because the creative industry values what you can do, not just what you can prove.</p>
+      <div style="margin-top:32px;" class="r d4">
+        <div style="display:flex;gap:28px;flex-wrap:wrap;">
+          <div><div class="stat-n" style="font-size:28px;">100%</div><div class="stat-l">Online Learning</div></div>
+          <div><div class="stat-n" style="font-size:28px;">1-on-1</div><div class="stat-l">Mentorship</div></div>
+          <div><div class="stat-n" style="font-size:28px;">Real</div><div class="stat-l">Portfolio Built</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="academy-img r">
+      <img src="394367.jpg" alt="Video editing course — Lee Samaz Academy" loading="lazy">
+    </div>
+  </div>
+
+  <div class="grid-sep courses-grid">
+    <div class="course r">
+      <div class="course-dur">3 Months · Beginner</div>
+      <div class="course-title">Graphic Design<br>Beginner Course</div>
+      <div class="course-desc">Master design fundamentals — typography, layout, colour theory, poster design and your first professional client projects.</div>
+      <div class="course-price">R1,500 <small>Full course · ZAR</small></div>
+      <ul class="course-list">
+        <li>Step-by-step video tutorials</li>
+        <li>Weekly practical assignments</li>
+        <li>WhatsApp support &amp; feedback</li>
+        <li>Portfolio-building projects</li>
+        <li>Certificate of completion</li>
+      </ul>
+      <a href="https://wa.me/27618201231?text=Hi%20Lee%20Samaz%20Studio%2C%20I%20want%20to%20enroll%20in%20the%20Graphic%20Design%20Beginner%20Course" class="btn-red course-cta" target="_blank" rel="noopener">Enroll via WhatsApp</a>
+    </div>
+
+    <div class="course r d1" style="border-top-color:var(--gold);">
+      <div class="course-dur">6 Months · Advanced</div>
+      <div class="course-title">Professional Design<br>Masterclass</div>
+      <div class="course-desc">Advanced branding, luxury identity design, marketing campaigns, and full client-ready deliverables. Launch your freelance career.</div>
+      <div class="course-price">R3,500 <small>Full course · ZAR</small></div>
+      <ul class="course-list">
+        <li>All beginner course content</li>
+        <li>Advanced branding modules</li>
+        <li>Business &amp; client pricing skills</li>
+        <li>Freelance career launch kit</li>
+        <li>1-on-1 mentorship sessions</li>
+      </ul>
+      <a href="https://wa.me/27618201231?text=Hi%20Lee%20Samaz%20Studio%2C%20I%20want%20to%20enroll%20in%20the%20Design%20Masterclass" class="btn-red course-cta" style="background:var(--gold);" target="_blank" rel="noopener">Enroll via WhatsApp</a>
+    </div>
+
+    <div class="course r d2">
+      <div class="course-dur">3–4 Months</div>
+      <div class="course-title">Photography<br>Course</div>
+      <div class="course-desc">Camera operation, lighting, Lightroom &amp; Photoshop editing, and building a professional photography portfolio.</div>
+      <div class="course-price">R2,800 <small>Full course · ZAR</small></div>
+      <ul class="course-list">
+        <li>Camera basics to pro techniques</li>
+        <li>Studio &amp; natural lighting</li>
+        <li>Professional retouching</li>
+        <li>Event photography preparation</li>
+        <li>1-on-1 mentorship</li>
+      </ul>
+      <a href="https://wa.me/27618201231?text=Hi%20Lee%20Samaz%20Studio%2C%20I%20want%20to%20enroll%20in%20the%20Photography%20Course" class="btn-red course-cta" target="_blank" rel="noopener">Enroll via WhatsApp</a>
+    </div>
+
+    <div class="course r">
+      <div class="course-dur">2–3 Months</div>
+      <div class="course-title">Drone<br>Cinematography</div>
+      <div class="course-desc">Aerial storytelling, professional flight operations, post-production colour grading and commercial drone content creation.</div>
+      <div class="course-price">R2,500 <small>Full course · ZAR</small></div>
+      <ul class="course-list">
+        <li>Flight operation fundamentals</li>
+        <li>Cinematic aerial techniques</li>
+        <li>Colour grading workflow</li>
+        <li>Commercial drone applications</li>
+        <li>Portfolio project delivery</li>
+      </ul>
+      <a href="https://wa.me/27618201231?text=Hi%20Lee%20Samaz%20Studio%2C%20I%20want%20to%20enroll%20in%20the%20Drone%20Cinematography%20Course" class="btn-red course-cta" target="_blank" rel="noopener">Enroll via WhatsApp</a>
+    </div>
+
+    <div class="course r d1">
+      <div class="course-dur">5–6 Months</div>
+      <div class="course-title">2D &amp; 3D<br>Architecture</div>
+      <div class="course-desc">SketchUp-based layouts, photorealistic 3D renders, interior visualization and professional architectural brief translation.</div>
+      <div class="course-price">R4,500 <small>Full course · ZAR</small></div>
+      <ul class="course-list">
+        <li>SketchUp foundations</li>
+        <li>2D floor plan design</li>
+        <li>Photorealistic 3D rendering</li>
+        <li>Interior &amp; exterior projects</li>
+        <li>Spatial psychology mapping</li>
+      </ul>
+      <a href="https://wa.me/27618201231?text=Hi%20Lee%20Samaz%20Studio%2C%20I%20want%20to%20enroll%20in%20the%20Architecture%20Course" class="btn-red course-cta" target="_blank" rel="noopener">Enroll via WhatsApp</a>
+    </div>
+
+    <div class="course academy-cta-card r d2">
+      <div class="big">START<br><span>TODAY</span></div>
+      <p>All courses are 100% online — no qualifications needed. Just the drive to create.</p>
+      <a href="https://wa.me/27618201231" class="btn-red" target="_blank" rel="noopener">WhatsApp to Enroll</a>
+      <div class="contact-line">+27 61 820 1231</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing" class="section section-grey">
+  <div class="eyebrow r">Pricing</div>
+  <h2 class="sh1 r d1">TRANSPARENT<br><span class="red">FAIR</span> <span class="ghost">PRICING</span></h2>
+  <p class="lead r d2">No hidden costs. No surprises. Final quotes depend on project scope — contact us for a custom package tailored to your exact vision and budget.</p>
+  <div class="grid-sep pricing-grid">
+    <div class="pcard r">
+      <div class="ptier">Starter Package</div>
+      <div class="pamount"><sup>R</sup>350</div>
+      <div class="pfrom">Starting from</div>
+      <ul class="plist">
+        <li><span class="ck">✦</span> Single logo design</li>
+        <li><span class="ck">✦</span> Business card design</li>
+        <li><span class="ck">✦</span> 2 social media posts</li>
+        <li><span class="ck">✦</span> 3 revision rounds</li>
+        <li><span class="ck">✦</span> PNG + PDF delivery</li>
+        <li class="dim"><span class="ck">✦</span> Brand guidelines</li>
+        <li class="dim"><span class="ck">✦</span> Social media kit</li>
+      </ul>
+      <a href="#contact" class="pbtn ghost">Get Started</a>
+    </div>
+    <div class="pcard featured r d1">
+      <div class="ptier">Professional Package</div>
+      <div class="pamount"><sup>R</sup>1,500</div>
+      <div class="pfrom">Starting from</div>
+      <ul class="plist">
+        <li><span class="ck">✦</span> Full brand identity</li>
+        <li><span class="ck">✦</span> Logo + style guide</li>
+        <li><span class="ck">✦</span> Social media kit</li>
+        <li><span class="ck">✦</span> Business card + letterhead</li>
+        <li><span class="ck">✦</span> 5 revision rounds</li>
+        <li><span class="ck">✦</span> All file formats</li>
+        <li class="dim"><span class="ck">✦</span> Monthly content management</li>
+      </ul>
+      <a href="#contact" class="pbtn solid">Get Started</a>
+    </div>
+    <div class="pcard r d2">
+      <div class="ptier">Premium Package</div>
+      <div class="pamount"><sup>R</sup>4,000</div>
+      <div class="pfrom">Starting from</div>
+      <ul class="plist">
+        <li><span class="ck">✦</span> Complete brand package</li>
+        <li><span class="ck">✦</span> Logo + guidelines + assets</li>
+        <li><span class="ck">✦</span> Social media management</li>
+        <li><span class="ck">✦</span> 20 posts/month content</li>
+        <li><span class="ck">✦</span> Video editing included</li>
+        <li><span class="ck">✦</span> Priority support</li>
+        <li><span class="ck">✦</span> Unlimited revisions</li>
+      </ul>
+      <a href="#contact" class="pbtn ghost">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" class="section section-dark">
+  <div class="testi-wrap">
+    <div class="testi-left">
+      <div class="eyebrow r">Testimonials</div>
+      <span class="big-q r" aria-hidden="true">"</span>
+      <h2 class="sh1 r d1">REAL <span class="red">CLIENTS.</span><br>REAL<br><span class="ghost">RESULTS.</span></h2>
+      <p class="r d2">Join 200+ satisfied clients who trust Lee Samaz Studio to bring their vision to life — from startups to established brands across South Africa.</p>
+      <a href="https://wa.me/27618201231" class="btn-red r d3" style="margin-top:28px;display:inline-flex;" target="_blank" rel="noopener">Start Your Project</a>
+    </div>
+    <div class="grid-sep testi-grid">
+      <div class="tcard r">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"Lee Samaz Studio transformed my brand completely. I went from looking like a side hustle to looking like a million-rand company. The logo they designed gets compliments every single day."</p>
+        <div class="tauthor">Nomsa M.</div>
+        <div class="trole">Entrepreneur, Pretoria</div>
+      </div>
+      <div class="tcard r d1">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"Hired them for my sister's lobola event and they absolutely nailed every design element. The backdrop, the invitations, the signage — everything was perfection. Will use them again."</p>
+        <div class="tauthor">Thabiso K.</div>
+        <div class="trole">Event Organiser</div>
+      </div>
+      <div class="tcard r d2">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"My menu designs and social media graphics have completely changed how customers see my restaurant. Within a month of launching the new brand, my bookings increased significantly."</p>
+        <div class="tauthor">Busi N.</div>
+        <div class="trole">Restaurant Owner</div>
+      </div>
+      <div class="tcard r d3">
+        <div class="tstars">★★★★★</div>
+        <p class="ttext">"The video editing for our company event was beyond our expectations. Professional, cinematic, and delivered ahead of schedule. Lee Samaz Studio is the real deal."</p>
+        <div class="tauthor">Sipho D.</div>
+        <div class="trole">Corporate Client</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process" class="section section-grey">
+  <div class="eyebrow r">How We Work</div>
+  <h2 class="sh1 r d1">OUR <span class="red">CREATIVE</span><br><span class="ghost">PROCESS</span></h2>
+  <div class="grid-sep process-grid" style="margin-top:48px;">
+    <div class="pstep r">
+      <div class="pstep-n">01</div>
+      <div class="pstep-arr">→</div>
+      <div class="pstep-t">Discovery</div>
+      <div class="pstep-d">Deep consultation to understand your brand, goals, target audience, and creative vision.</div>
+    </div>
+    <div class="pstep r d1">
+      <div class="pstep-n">02</div>
+      <div class="pstep-arr">→</div>
+      <div class="pstep-t">Research</div>
+      <div class="pstep-d">We study your industry, competitors, and market to ground our strategy in real insight.</div>
+    </div>
+    <div class="pstep r d2">
+      <div class="pstep-n">03</div>
+      <div class="pstep-arr">→</div>
+      <div class="pstep-t">Concept</div>
+      <div class="pstep-d">Our team develops multiple creative directions before presenting the strongest ideas.</div>
+    </div>
+    <div class="pstep r d3">
+      <div class="pstep-n">04</div>
+      <div class="pstep-arr">→</div>
+      <div class="pstep-t">Design</div>
+      <div class="pstep-d">We bring the chosen concept to life with expert typography, colour, and composition.</div>
+    </div>
+    <div class="pstep r d4">
+      <div class="pstep-n">05</div>
+      <div class="pstep-arr">→</div>
+      <div class="pstep-t">Review</div>
+      <div class="pstep-d">You review, we listen. Revisions made until every detail is exactly right for you.</div>
+    </div>
+    <div class="pstep r">
+      <div class="pstep-n">06</div>
+      <div class="pstep-t">Delivery</div>
+      <div class="pstep-d">Final files delivered professionally in all formats needed for print and digital use.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section section-dark">
+  <div class="bg-img" style="background-image:url('394382.jpg');" aria-hidden="true"></div>
+  <div class="contact-inner">
+    <div>
+      <div class="eyebrow r">Get In Touch</div>
+      <h2 class="sh1 r d1">LET'S <span class="red">BUILD</span><br>YOUR<br><span class="ghost">BRAND</span></h2>
+      <p style="font-size:15px;line-height:1.85;color:var(--muted);margin:16px 0 36px;" class="r d2">Ready to elevate your brand? Reach out and let's create something extraordinary together. We respond within 24 hours.</p>
+
+      <div class="cinfo-item r">
+        <span class="cinfo-icon">📞</span>
+        <div>
+          <div class="cinfo-label">Call / WhatsApp</div>
+          <div class="cinfo-val">
+            <a href="tel:+27618201231">+27 61 820 1231</a><br>
+            <a href="tel:+27642948911">+27 64 294 8911</a>
+          </div>
+        </div>
+      </div>
+      <div class="cinfo-item r d1">
+        <span class="cinfo-icon">✉️</span>
+        <div>
+          <div class="cinfo-label">Email</div>
+          <div class="cinfo-val"><a href="mailto:leesamazstudio@gmail.com">leesamazstudio@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="cinfo-item r d2">
+        <span class="cinfo-icon">🌐</span>
+        <div>
+          <div class="cinfo-label">Website</div>
+          <div class="cinfo-val"><a href="https://leesamazstudio.co.za" target="_blank" rel="noopener">leesamazstudio.co.za</a></div>
+        </div>
+      </div>
+      <div class="cinfo-item r d3">
+        <span class="cinfo-icon">📍</span>
+        <div>
+          <div class="cinfo-label">Location</div>
+          <div class="cinfo-val">Pretoria, South Africa</div>
+          <div class="cinfo-sub">Nationwide &amp; international delivery</div>
+        </div>
+      </div>
+
+      <div class="socials r">
+        <a href="https://www.facebook.com/p/Lee-Samaz-Studio-61567311488706/" class="soc-link" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/leesamaz.designer" class="soc-link" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@leesamazstudios" class="soc-link" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://x.com/designersamaz" class="soc-link" target="_blank" rel="noopener">Twitter / X</a>
+        <a href="https://linkedin.com/in/lee-samaz" class="soc-link" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://g.co/kgs/FnU2agp" class="soc-link" target="_blank" rel="noopener">Google Page</a>
+      </div>
+    </div>
+
+    <div class="r d1">
+      <form class="cform" id="cform" onsubmit="submitForm(event)" novalidate>
+        <div class="frow">
+          <div class="fg">
+            <label for="fname">First Name</label>
+            <input id="fname" type="text" placeholder="Your first name" required>
+          </div>
+          <div class="fg">
+            <label for="lname">Last Name</label>
+            <input id="lname" type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="you@yourbrand.com" required>
+        </div>
+        <div class="fg">
+          <label for="phone">Phone / WhatsApp</label>
+          <input id="phone" type="tel" placeholder="+27 ...">
+        </div>
+        <div class="fg">
+          <label for="service">Service Required</label>
+          <select id="service" required>
+            <option value="" disabled selected>Select a service…</option>
+            <option value="graphic">Graphic Design</option>
+            <option value="logo">Logo &amp; Brand Identity</option>
+            <option value="photo">Photography</option>
+            <option value="video">Video Editing &amp; Cinematography</option>
+            <option value="drone">Drone Cinematography</option>
+            <option value="social">Social Media &amp; Digital Marketing</option>
+            <option value="wedding">Wedding &amp; Event Design</option>
+            <option value="arch">3D Architecture</option>
+            <option value="course">Online Academy Course</option>
+            <option value="brand">Full Brand Package</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="msg">Tell Us About Your Project</label>
+          <textarea id="msg" placeholder="Describe your vision, budget, and deadline…" required></textarea>
+        </div>
+        <button type="submit" class="btn-red fsub">Send Message ✦</button>
+        <p id="form-ok">✦ Message received! We'll be in touch within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="fcopy">© 2024–2025 Lee Samaz Studio. All rights reserved.</div>
+  <div class="flogo"><span>LEE</span> SAMAZ STUDIO</div>
+  <div class="ftag">Your Vision. Our Art.</div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ----- Cursor ----- */
+const cur  = document.getElementById('cur');
+const cur2 = document.getElementById('cur2');
+let mx=0,my=0,fx=0,fy=0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left  = mx + 'px';
+  cur.style.top   = my + 'px';
+});
+(function tick(){
+  fx += (mx-fx)*.12;
+  fy += (my-fy)*.12;
+  cur2.style.left = fx + 'px';
+  cur2.style.top  = fy + 'px';
+  requestAnimationFrame(tick);
+})();
+
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cur.style.width=cur.style.height='18px'; cur2.style.width=cur2.style.height='52px'; });
+  el.addEventListener('mouseleave',()=>{ cur.style.width=cur.style.height='10px'; cur2.style.width=cur2.style.height='34px'; });
+});
+
+/* ----- Nav scroll ----- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', ()=>{ nav.classList.toggle('stuck', window.scrollY>50); }, {passive:true});
+
+/* ----- Mobile menu ----- */
+const mob = document.getElementById('mob');
+const ham = document.getElementById('ham');
+function toggleMob(){
+  const open = mob.classList.toggle('open');
+  ham.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMob(){
+  mob.classList.remove('open');
+  ham.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ----- Smooth scroll ----- */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+/* ----- Reveal on scroll ----- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target); }});
+},{threshold:0.1});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* ----- Portfolio filter ----- */
+function setFilter(btn, cat){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.mi').forEach(mi=>{
+    const show = cat==='all' || mi.dataset.cat===cat;
+    mi.style.opacity = show ? '1' : '0.18';
+    mi.style.pointerEvents = show ? 'auto' : 'none';
+    mi.style.transition = 'opacity .3s';
+  });
+}
+
+/* ----- Form submit ----- */
+function submitForm(e){
+  e.preventDefault();
+  const ok = document.getElementById('form-ok');
+  ok.style.display = 'block';
+  e.target.querySelector('.fsub').textContent = 'Message Sent ✦';
+  e.target.querySelector('.fsub').style.background = '#2a6e2a';
+}
+</script>
+</body>
+</html>
